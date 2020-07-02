@@ -1,11 +1,19 @@
 import Provinsi from "../scenes/provinsi";
 import Pemakai from "../scenes/pemakai";
 import Kontrasepsi from "../scenes/kontrasepsi/Kontrasepsi";
-
-const { default: Home } = require("../scenes/Home");
-
+import PemakaiDetail from "../scenes/pemakai/PemakaiDetail/PemakaiDetail";
 
 const routes = [
+    {
+        path: "/pemakai/:id",
+        component: PemakaiDetail,
+        exact: true
+    },
+    {
+        path: "/pemakai/add",
+        component: PemakaiDetail,
+        exact: true
+    },
     {
         path: "/",
         component: Pemakai,

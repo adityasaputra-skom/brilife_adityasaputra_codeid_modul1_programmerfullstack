@@ -83,7 +83,6 @@ class Provinsi extends Component {
     render() { 
         const { loading } = this.props;
         const { data, total, params } = this.state;
-        console.log("dataa", data);
         
         const columns = [
             {
