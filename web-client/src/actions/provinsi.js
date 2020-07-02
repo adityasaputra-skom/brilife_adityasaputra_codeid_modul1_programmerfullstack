@@ -61,7 +61,8 @@ export const findAll = ({ search, sort = "asc", page = 0, size = 10 } = {}) => (
   dispatch({
     type: FIND_PROVS_REQUEST
   });
-
+  
+  
   instanceAxios
     .get("provinsi", {
       params: {
@@ -73,10 +74,11 @@ export const findAll = ({ search, sort = "asc", page = 0, size = 10 } = {}) => (
     })
     .then((data) => {
       dispatch(findAllSucces(data));
-      
+      console.log("action");
     })
     .catch((error) => {
       dispatch(findAllFailure(error));
+      console.log("actions", error);
     });
 };
 

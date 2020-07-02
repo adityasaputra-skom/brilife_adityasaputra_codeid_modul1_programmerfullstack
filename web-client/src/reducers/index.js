@@ -5,9 +5,21 @@ import {
   deletedProvById,
   saveProvs,
 } from "./provinsi";
+
+import {
+  savePKontrasepsi,
+  deletedPKontrasepsiById,
+  findPKontrasepsiById,
+  findPemakaiKontrasepsis,
+} from "./pemakai";
+
 export default combineReducers({
   findProvs,
   findProvById,
   deletedProvById,
-  saveProvs
+  saveProvs,
+  savePKontrasepsi,
+  deletedPKontrasepsiById,
+  findPKontrasepsiById,
+  findPemakaiKontrasepsis,
 });

@@ -15,7 +15,7 @@ instanceAxios.interceptors.response.use(
     const { data } = response;
     console.log("data", data);
     
-    if (data.code !== 1) {
+    if (data.code !== 0) {
       const error = new Error(data.message || "Unknow Error.");
       error.data = data.data;
       throw error;

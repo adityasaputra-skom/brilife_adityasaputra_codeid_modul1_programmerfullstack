@@ -11,7 +11,7 @@ import {
     FIND_PKONTRASEPSI_REQUEST,
     FIND_PKONTRASEPSI_SUCCESS,
     FIND_PKONTRASEPSI_FAILURE,
-  } from "../actions/pemakai";
+  } from "../actions/constants";
 
 
   

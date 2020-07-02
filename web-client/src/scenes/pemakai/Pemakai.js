@@ -95,7 +95,8 @@ class Pemakai extends Component {
   render() {
     const { classes, loading } = this.props;
     const { data, total, error, table } = this.state;
-
+    console.log("dataaaaaaa", data);
+    
     const columns = [
       {
         name: "id",
@@ -187,9 +188,9 @@ class Pemakai extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.findProvs.data,
-  error: state.findProvs.error,
-  loading: state.findProvs.loading,
+  data: state.findPemakaiKontrasepsis.data,
+  error: state.findPemakaiKontrasepsis.error,
+  loading: state.findPemakaiKontrasepsis.loading,
 });
 
 const mapDispatchToProps = {

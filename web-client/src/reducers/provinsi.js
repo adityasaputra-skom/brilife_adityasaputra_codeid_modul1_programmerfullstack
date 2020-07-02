@@ -103,6 +103,8 @@ import {
           data: null
         };
       case FIND_PROVS_SUCCESS:
+        console.log("action", action.data);
+        
         return {
           data: action.data,
           loading: false,

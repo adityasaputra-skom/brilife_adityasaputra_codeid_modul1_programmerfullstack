@@ -35,7 +35,9 @@ class Provinsi extends Component {
       componentDidUpdate(prevProps, prevState) {
         const { data } = this.props;
     
+        console.log("data updte", data);
         if (prevProps.data !== data) {
+          
           this.setState({ data: data.list, total: data.total });
         } 
       }
@@ -83,6 +85,7 @@ class Provinsi extends Component {
     render() { 
         const { loading } = this.props;
         const { data, total, params } = this.state;
+        console.log("datta",data);
         
         const columns = [
             {
@@ -93,7 +96,7 @@ class Provinsi extends Component {
               },
             },
             {
-              name: "nama",
+              name: "name",
               label: "Name",
               options: {
                 sort: false,
