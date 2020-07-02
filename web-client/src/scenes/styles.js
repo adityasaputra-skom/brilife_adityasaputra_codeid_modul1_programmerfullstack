@@ -70,7 +70,7 @@ const styles = (theme) => ({
     },
     buttonReload: {
       marginRight: "20px",
-      background: "linear-gradient(45deg, #890089 30%,#602080 90%)",
+      background: "linear-gradient(45deg, #b590ca 30%,#8CA6DB 90%)",
       borderRadius: 3,
       border: 0,
       color: "white",
@@ -79,7 +79,7 @@ const styles = (theme) => ({
       boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     },
     buttonAdd: {
-      background: "linear-gradient(45deg, #890089 30%,#602080 90%)",
+      background: "linear-gradient(45deg, #b590ca 30%,#8CA6DB 90%)",
       borderRadius: 3,
       border: 0,
       color: "white",

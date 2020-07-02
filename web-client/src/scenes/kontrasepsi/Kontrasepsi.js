@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import { findAll, deletedById } from "../../actions/provinsi";
 import Page from "../../components/Page";
 import styles from "../styles";
-class Provinsi extends Component {
+
+class Kontrasepsi extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -152,6 +153,6 @@ const mapStateToProps = (state) => ({
   };
   
   export default withStyles(styles, { withTheme: true })(
-    connect(mapStateToProps, mapDispatchToProps)(Provinsi)
+    connect(mapStateToProps, mapDispatchToProps)(Kontrasepsi)
   );
   

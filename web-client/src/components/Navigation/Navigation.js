@@ -13,8 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import {
   AllInbox as ItemIcon,
   Home as HomeIcon,
-  LocalAtm as TransactionIcon,
-  LooksOne as UnitIcon,
+  LooksOne as Kontrasepsi,
   Money as StockIcon
 } from "@material-ui/icons";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -53,6 +52,12 @@ export default function Navigation() {
       active: "provinsi",
       icon: ItemIcon,
       label: "Provinsi"
+    },
+    {
+      path: "/kontrasepsi",
+      active: "kontrasepsi",
+      icon: Kontrasepsi,
+      label: "Kontrasepsi"
     },
   ];
 
