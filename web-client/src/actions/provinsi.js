@@ -55,24 +55,32 @@ import {
       });
   };
   
-  export const findAll = ({
-    search,
-    sort = "asc",
-    page = 0,
-    size = 10
-  } = {}) => dispatch => {
-    dispatch({ type: FIND_PROVS_REQUEST });
-    instanceAxios
-      .get(`provinsi`, {
-        params: { ...search, sort, page, size }
-      })
-      .then(data => {
-        dispatch(findAllSucces(data));
-      })
-      .catch(error => {
-        dispatch(findAllFailure(error));
-      });
-  };
+  
+export const findAll = ({ search, sort = "asc", page = 0, size = 10 } = {}) => (
+  dispatch
+) => {
+  dispatch({
+    type: FIND_PROVS_REQUEST
+  });
+
+  instanceAxios
+    .get("provinsi", {
+      params: {
+        ...search,
+        sort,
+        page,
+        size
+      }
+    })
+    .then((data) => {
+      dispatch(findAllSucces(data));
+      
+    })
+    .catch((error) => {
+      dispatch(findAllFailure(error));
+    });
+};
+
   
   function findByIdSucces(data) {
     return {

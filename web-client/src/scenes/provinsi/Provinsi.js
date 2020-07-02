@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import MUIDataTable from "mui-datatables";
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import MUIDataTable from "mui-datatables";
+import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { findAll } from "../../actions/provinsi";
+import { deletedById, findAll } from "../../actions/provinsi";
 import Page from "../../components/Page";
 import styles from "../styles";
 class Provinsi extends Component {
@@ -12,140 +12,165 @@ class Provinsi extends Component {
         this.state = {
           data: [],
           total: 0,
-          table: {
+          params: {
+            search: { name: "" },
             sort: "asc",
-            size: 20,
             page: 0,
-            search: {
-              name: ""
-            }
+            size: 10,
           },
-          error: null
+          error: null,
+          rowsSelected: [],
         };
       }
 
-      
-  onReload = () => {
-    this.reload();
-  };
-
-  reload = () => {
-    this.props.findAll(this.state.table);
-  };
-
-  onRowClick = rowData => {
-    this.props.history.push(`/items/${rowData[0]}`);
-  };
-
-  onAdd = () => {
-    this.props.history.push(`/items/add`);
-  };
-
-  componentDidMount() {
-    this.reload();
-  }
-
-  onChangeRowsPerPage = numbersOfRow => {
-    const { table } = this.state;
-    this.setState({ table: { ...table, size: numbersOfRow } });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    const { deleteData, deleteError, error, data } = this.props;
-    const { table } = this.state;
-
-    if (prevProps.data !== data) {
-      this.setState({ data: data.list, total: data.total });
-    } else if (
-      prevState.table !== table ||
-      prevProps.deleteData !== deleteData
-    ) {
-      this.reload();
-    } else if (deleteError && prevProps.deleteError !== deleteError) {
-      this.setState({ error: deleteError });
-    } else if (error && prevProps.error !== error) {
-      this.setState({ error: error });
-    }
-  }
-
-  onChangePage = currentPage => {
-    const { table } = this.state;
-    this.setState({ table: { ...table, search: { name: currentPage } } });
-  };
-
-  onSearchChange = searchText => {
-    const { table } = this.state;
-    this.setState({ table: { ...table, search: { name: searchText } } });
-  };
-
-  onColumnSortChange = (changedColumn, direction) => {
-    const { table } = this.state;
-    const sort = direction === "descending" ? "desc" : "asc";
-    this.setState({ table: { ...table, sort } });
-  };
-
-  onRowsDelete = rowsDeleted => {
-    const { list } = this.props.data;
-    const e = list[rowsDeleted.data[0].index];
-    this.props.deletedById(e.id);
-    return false;
-  };
-
-    render() { 
-      const { classes, loading } = this.props;
-      const { data, total, error, table } = this.state;
-
-      const columns = [
-        {
-          name: "id",
-          label: "ID",
-          options: {
-            sortDirection: table.sort
-          }
-        },
-        {
-          name: "name",
-          label: "Name",
-          options: {
-            sort: false
-          }
-        }
-      ];
-
-      const options = {
-        serverSide: true,
-        page: table.page,
-        filter: false,
-        count: total,
-        onRowsDelete: this.onRowsDelete,
-        onRowClick: this.onRowClick,
-        rowsPerPage: table.size,
-        rowsPerPageOptions: [5, 10, 25, 50, 100],
-        onChangeRowsPerPage: this.onChangeRowsPerPage,
-        onChangePage: this.onChangePage,
-        onSearchChange: this.onSearchChange,
-        onColumnSortChange: this.onColumnSortChange,
-        searchText: table.search.name,
-        selectableRows: "single",
-        textLabels: {
-          body: {
-            noMatch: loading ? (
-              <CircularProgress />
-            ) : (
-              "Sorry, no matching records found"
-            )
-          }
+      componentDidMount() {
+        this.reload();
+      }
+    
+      reload() {
+        this.props.findAll(this.state.params);
+      }
+    
+      componentDidUpdate(prevProps, prevState) {
+        const { data } = this.props;
+    
+        if (prevProps.data !== data) {
+          this.setState({ data: data.list, total: data.total });
+        } 
+      }
+    
+      onReload = () => {
+        this.reload();
+      };
+    
+      onChangePage = (currentPage) => {
+        const { params } = this.state;
+        this.setState({ params: { ...params, page: currentPage } });
+      };
+    
+      onChangeRowsPerPage = (numberOfRows) => {
+        const { params } = this.state;
+        this.setState({ params: { ...params, size: numberOfRows } });
+      };
+    
+      onSearchChange = (searchText) => {
+        const { params } = this.state;
+        this.setState({ params: { ...params, search: { name: searchText } } });
+      };
+    
+      onColumnSortChange = (changedColumn, direction) => {
+        const { params } = this.state;
+        const sort = direction === "descending" ? "desc" : "asc";
+        this.setState({ params: { ...params, sort } });
+      };
+    
+      isRowSelectable = (index) => {
+        const { data } = this.state;
+        if (data[index]) {
+          return data[index].isUsed ? false : true;
+        } else {
+          return false;
         }
       };
-  
+    
+      onRowsSelect = (rowsSelected, allRows) => {
+        const selected = allRows.map((item) => item.index);
+        this.setState({
+          rowsSelected: selected,
+        });
+      };
+    render() { 
+        const { loading } = this.props;
+        const { data, total, params } = this.state;
+        console.log("dataa", data);
+        
+        const columns = [
+            {
+              name: "id",
+              label: "ID",
+              options: {
+                sortDirection: params.sort,
+              },
+            },
+            {
+              name: "nama",
+              label: "Name",
+              options: {
+                sort: false,
+              },
+            },
+          ];
+
+          const options = {
+            serverSide: true,
+            page: params.page,
+            count: total,
+            rowsPerPage: params.size,
+            rowsPerPageOptions: [5, 10, 15, 25, 30],
+            filter: false,
+            isRowSelectable: this.isRowSelectable,
+            searchText: params.search.name,
+            onChangePage: this.onChangePage,
+            onChangeRowsPerPage: this.onChangeRowsPerPage,
+            onSearchChange: this.onSearchChange,
+            onColumnSortChange: this.onColumnSortChange,
+            onRowsSelect: this.onRowsSelect,
+            responsive: "scroll",
+            textLabels: {
+              body: {
+                noMatch: loading ? (
+                  <CircularProgress />
+                ) : (
+                  "Sorry, not match records not found"
+                ),
+              },
+            },
+          };
         return ( 
             <Page>
                 <MUIDataTable
                 title={"List Provinsi"}
-                data={!loading ? data : []}
+                data={data}
                 columns={columns}
                 options={options}
                 />
+
+<PDFViewer>
+        <Document>
+            <Page>
+                <Table
+                    data={[
+                        {firstName: "John", lastName: "Smith", dob: new Date(2000, 1, 1), country: "Australia", phoneNumber: "xxx-0000-0000"}
+                    ]}
+                >
+                    <TableHeader>
+                        <TableCell>
+                            First Name
+                        </TableCell>
+                        <TableCell>
+                            Last Name
+                        </TableCell>
+                        <TableCell>
+                            DOB
+                        </TableCell>
+                        <TableCell>
+                            Country
+                        </TableCell>
+                        <TableCell>
+                            Phone Number
+                        </TableCell>
+                    </TableHeader>
+                    <TableBody>
+                        <DataTableCell getContent={(r) => r.firstName}/>
+                        <DataTableCell getContent={(r) => r.lastName}/>
+                        <DataTableCell getContent={(r) => r.dob.toLocaleString()}/>
+                        <DataTableCell getContent={(r) => r.country}/>
+                        <DataTableCell getContent={(r) => r.phoneNumber}/>
+                    </TableBody>
+                </Table>
+            </Page>
+        </Document>
+    </PDFViewer>
             </Page>
          );
         
@@ -159,7 +184,7 @@ const mapStateToProps = (state) => ({
   });
   
   const mapDispatchToProps = {
-    findAll,
+    findAll, deletedById
   };
   
   export default withStyles(styles, { withTheme: true })(
