@@ -8,10 +8,9 @@ class Home extends Component {
         this.state = {  }
     }
     render() { 
-        return ( 
-            <Page>
-                <div>didit</div>
-            </Page>
+        return ( <Page>
+            <div>didit</div>
+        </Page>
          );
     }
 }
