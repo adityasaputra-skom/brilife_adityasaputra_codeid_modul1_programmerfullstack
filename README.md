@@ -6,6 +6,9 @@ The app will start running at <http://localhost:8080>.
 
 The app defines following CRUD APIs.
 
+
+**PROVINSI**
+
     GET /provinsi
     
     POST /provinsi
@@ -15,3 +18,27 @@ The app defines following CRUD APIs.
     PUT /provinsi/{userId}
     
     DELETE /provinsi/{userId}
+
+**KONTRASEPSI**
+
+    GET /kontrasepsi
+    
+    POST /kontrasepsi
+    
+    GET /kontrasepsi/{userId}
+    
+    PUT /kontrasepsi/{userId}
+    
+    DELETE /kontrasepsi/{userId}
+
+**PEMAKAI KONTRASEPSI**
+
+    GET /pemakai
+    
+    POST /pemakai
+    
+    GET /pemakai/{userId}
+    
+    PUT /pemakai/{userId}
+    
+    DELETE /pemakai/{userId}
