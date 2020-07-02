@@ -1,24 +1,25 @@
 import {
-    FIND_PROVS_FAILURE,
-    FIND_PROVS_SUCCESS,
-    FIND_PROVS_REQUEST,
-    DELETE_PROV_REQUEST,
-    DELETE_PROV_SUCCESS,
-    DELETE_PROV_FAILURE,
-    SAVE_PROV_FAILURE,
-    SAVE_PROV_REQUEST,
-    SAVE_PROV_SUCCESS,
-    FIND_PROV_REQUEST,
-    FIND_PROV_SUCCESS,
-    FIND_PROV_FAILURE,
+    FIND_PKONTRASEPSIS_FAILURE,
+    FIND_PKONTRASEPSIS_SUCCESS,
+    FIND_PKONTRASEPSIS_REQUEST,
+    DELETE_PKONTRASEPSI_REQUEST,
+    DELETE_PKONTRASEPSI_SUCCESS,
+    DELETE_PKONTRASEPSI_FAILURE,
+    SAVE_PKONTRASEPSI_FAILURE,
+    SAVE_PKONTRASEPSI_REQUEST,
+    SAVE_PKONTRASEPSI_SUCCESS,
+    FIND_PKONTRASEPSI_REQUEST,
+    FIND_PKONTRASEPSI_SUCCESS,
+    FIND_PKONTRASEPSI_FAILURE,
   } from "./constants";
 
   import { instanceAxios } from "../utils/api";
 
+  
   export const deletedById = id => dispatch => {
-    dispatch({ type: DELETE_PROV_REQUEST });
+    dispatch({ type: DELETE_PKONTRASEPSI_REQUEST });
     instanceAxios
-      .delete(`provinsi/${id}`)
+      .delete(`pemakai/${id}`)
       .then(data => {
         dispatch(deletedSuccess(data));
       })
@@ -27,12 +28,12 @@ import {
       });
   };
   
-  export const saveProvs = ({ id, name }) => dispatch => {
-    dispatch({ type: SAVE_PROV_REQUEST });
+  export const saveProvs = ({ id, provinsi, kontrasepsi, jumlah }) => dispatch => {
+    dispatch({ type: SAVE_PKONTRASEPSI_REQUEST });
   
     const request = id
-      ? instanceAxios.put(`provinsi/${id}`, { id, name })
-      : instanceAxios.post(`provinsi`, { name });
+      ? instanceAxios.put(`pemakai/${id}`, { id, provinsi, kontrasepsi, jumlah})
+      : instanceAxios.post(`pemakai`, { provinsi, kontrasepsi, jumlah });
     request
       .then(data => {
         dispatch(saveSuccess(data));
@@ -43,9 +44,9 @@ import {
   };
   
   export const findProvById = id => dispatch => {
-    dispatch({ type: FIND_PROV_REQUEST });
+    dispatch({ type: FIND_PKONTRASEPSI_REQUEST });
     instanceAxios
-      .get(`provinsi/${id}`)
+      .get(`pemakai/${id}`)
       .then(data => {
         dispatch(findByIdSucces(data));
       })
@@ -59,11 +60,11 @@ export const findAll = ({ search, sort = "asc", page = 0, size = 10 } = {}) => (
   dispatch
 ) => {
   dispatch({
-    type: FIND_PROVS_REQUEST
+    type: FIND_PKONTRASEPSIS_REQUEST
   });
 
   instanceAxios
-    .get("provinsi", {
+    .get("pemakai", {
       params: {
         ...search,
         sort,
@@ -83,55 +84,55 @@ export const findAll = ({ search, sort = "asc", page = 0, size = 10 } = {}) => (
   
   function findByIdSucces(data) {
     return {
-      type: FIND_PROV_SUCCESS,
+      type: FIND_PKONTRASEPSI_SUCCESS,
       data: data
     };
   }
   
   function findByIdFailure(error) {
     return {
-      type: FIND_PROV_FAILURE,
+      type: FIND_PKONTRASEPSI_FAILURE,
       error: error
     };
   }
   function findAllSucces(data) {
     return {
-      type: FIND_PROVS_SUCCESS,
+      type: FIND_PKONTRASEPSIS_SUCCESS,
       data: data
     };
   }
   
   function findAllFailure(error) {
     return {
-      type: FIND_PROVS_FAILURE,
+      type: FIND_PKONTRASEPSIS_FAILURE,
       error: error
     };
   }
   
   function deletedSuccess(data) {
     return {
-      type: DELETE_PROV_SUCCESS,
+      type: DELETE_PKONTRASEPSI_SUCCESS,
       data: data
     };
   }
   
   function deletedItemFailure(error) {
     return {
-      type: DELETE_PROV_FAILURE,
+      type: DELETE_PKONTRASEPSI_FAILURE,
       error: error
     };
   }
   
   function saveFailure(error) {
     return {
-      type: SAVE_PROV_FAILURE,
+      type: SAVE_PKONTRASEPSI_FAILURE,
       error: error
     };
   }
   
   function saveSuccess(data) {
     return {
-      type: SAVE_PROV_SUCCESS,
+      type: SAVE_PKONTRASEPSI_SUCCESS,
       data: data
     };
   }

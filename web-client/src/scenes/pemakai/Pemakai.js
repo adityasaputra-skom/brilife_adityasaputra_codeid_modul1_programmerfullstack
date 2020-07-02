@@ -35,11 +35,11 @@ class Pemakai extends Component {
   };
 
   onRowClick = (rowData) => {
-    this.props.history.push(`/items/${rowData[0]}`);
+    this.props.history.push(`/pemakai/${rowData[0]}`);
   };
 
   onAdd = () => {
-    this.props.history.push(`/items/add`);
+    this.props.history.push(`/pemakai/add`);
   };
 
   componentDidMount() {
@@ -105,8 +105,22 @@ class Pemakai extends Component {
         },
       },
       {
-        name: "name",
-        label: "Name",
+        name: "provinsi.name",
+        label: "Provinsi",
+        options: {
+          sort: false,
+        },
+      },
+      {
+        name: "kontrasepsi.name",
+        label: "Alat Kontrasepsi",
+        options: {
+          sort: false,
+        },
+      },
+      {
+        name: "jumlah",
+        label: "Jumlah Pemakai Kontrasepsi",
         options: {
           sort: false,
         },
@@ -158,12 +172,12 @@ class Pemakai extends Component {
             onClick={this.onAdd}
             startIcon={<AddCircleOutlineIcon />}
           >
-            New Item
+            Add
           </Button>
         </ButtonGroup>
         <MUIDataTable
           title={"List Pemakai Kontrasepsi"}
-          data={!loading ? data : []}
+          data={data}
           columns={columns}
           options={options}
         />
