@@ -13,6 +13,8 @@ function sleep(delay, value) {
 instanceAxios.interceptors.response.use(
   function (response) {
     const { data } = response;
+    console.log("data", data);
+    
     if (data.code !== 1) {
       const error = new Error(data.message || "Unknow Error.");
       error.data = data.data;

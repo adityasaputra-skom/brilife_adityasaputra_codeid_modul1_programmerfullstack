@@ -1,7 +1,13 @@
-import React from "react";
 import { combineReducers } from "redux";
-import { Provs } from "./provinsi";
+import {
+  findProvs,
+  findProvById,
+  deletedProvById,
+  saveProvs,
+} from "./provinsi";
 export default combineReducers({
-    Provs
-  });
-  
+  findProvs,
+  findProvById,
+  deletedProvById,
+  saveProvs
+});

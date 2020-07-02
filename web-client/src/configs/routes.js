@@ -1,4 +1,5 @@
 import Provinsi from "../scenes/provinsi";
+import Pemakai from "../scenes/pemakai";
 
 const { default: Home } = require("../scenes/Home");
 
@@ -6,7 +7,7 @@ const { default: Home } = require("../scenes/Home");
 const routes = [
     {
         path: "/",
-        component: Home,
+        component: Pemakai,
         exact: true
     },{
         path: "/provinsi",

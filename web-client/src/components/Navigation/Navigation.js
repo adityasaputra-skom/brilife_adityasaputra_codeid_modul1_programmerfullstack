@@ -111,7 +111,7 @@ export default function Navigation() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.appTitle} variant="h6" noWrap>
-            Inventory App
+            Web for BRI Life test
           </Typography>
         </Toolbar>
       </AppBar>

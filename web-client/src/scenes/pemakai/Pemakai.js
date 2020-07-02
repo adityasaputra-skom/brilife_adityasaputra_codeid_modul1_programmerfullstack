@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { findAll } from "../../actions/provinsi";
 import Page from "../../components/Page";
 import styles from "../styles";
-class Provinsi extends Component {
+class Pemakai extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -141,7 +141,7 @@ class Provinsi extends Component {
         return ( 
             <Page>
                 <MUIDataTable
-                title={"List Provinsi"}
+                title={"List Pemakai Kontrasepsi"}
                 data={!loading ? data : []}
                 columns={columns}
                 options={options}
@@ -163,6 +163,6 @@ const mapStateToProps = (state) => ({
   };
   
   export default withStyles(styles, { withTheme: true })(
-    connect(mapStateToProps, mapDispatchToProps)(Provinsi)
+    connect(mapStateToProps, mapDispatchToProps)(Pemakai)
   );
   

@@ -5,15 +5,15 @@ const styles = (theme) => ({
     display: "flex"
   },
   appTitle: {
-    fontFamily: "Sofia"
+    fontFamily: "Arial"
   },
   link: {
     color: "#12cad6",
     textDecoration: "none"
   },
   isActive: {
-    backgroundColor: "bisque",
-    color: "#FE6B8B",
+    backgroundColor: "white",
+    color: "#0fabbc",
     textDecoration: "none"
   },
   primaryIcon: {
