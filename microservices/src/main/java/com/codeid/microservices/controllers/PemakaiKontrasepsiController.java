@@ -42,7 +42,7 @@ public class PemakaiKontrasepsiController {
 
     @Autowired
     private ProvinsiService pService;
-    
+
     @Autowired
     private KontrasepsiService kService;
 
@@ -56,19 +56,19 @@ public class PemakaiKontrasepsiController {
         pemakaiService.save(entity);
 
         ModelMapper modelMapper = new ModelMapper();
-        
+
         PemakaiKontrasepsiModel data = modelMapper.map(entity, PemakaiKontrasepsiModel.class);
-        
 
         return ResponseMessage.success(data);
     }
 
     @PutMapping("/{id}")
-    public ResponseMessage<PemakaiKontrasepsiModel> edit(@PathVariable Integer id, @RequestBody @Valid PemakaiKontrasepsiModel model) {
-        
+    public ResponseMessage<PemakaiKontrasepsiModel> edit(@PathVariable Integer id,
+            @RequestBody @Valid PemakaiKontrasepsiModel model) {
+
         ModelMapper modelMapper = new ModelMapper();
         PemakaiKontrasepsi entity = pemakaiService.findById(id);
-    
+
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.map(model, entity);
         entity.setProvinsi(pService.findById(model.getId()));
@@ -93,7 +93,7 @@ public class PemakaiKontrasepsiController {
     @GetMapping("/{id}")
     public ResponseMessage<PemakaiKontrasepsiModel> findById(@PathVariable Integer id) {
         PemakaiKontrasepsi entity = pemakaiService.findById(id);
-        
+
         ModelMapper modelMapper = new ModelMapper();
         PemakaiKontrasepsiModel data = modelMapper.map(entity, PemakaiKontrasepsiModel.class);
 
@@ -102,11 +102,8 @@ public class PemakaiKontrasepsiController {
 
     @GetMapping
     public ResponseMessage<PageableList<PemakaiKontrasepsiModel>> findAll(
-        @RequestParam(required = false) Provinsi provinsi,
-        @RequestParam(defaultValue = "asc") String sort, 
-        @RequestParam(defaultValue = "0") int page, 
-        @RequestParam(defaultValue = "10") int size
-    ) {
+            @RequestParam(required = false) Provinsi provinsi, @RequestParam(defaultValue = "asc") String sort,
+            @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         if (size > 100) {
             size = 100;
         }
@@ -117,11 +114,13 @@ public class PemakaiKontrasepsiController {
         List<PemakaiKontrasepsi> stocks = pagePemakaiKontrasepsis.toList();
 
         ModelMapper modelMapper = new ModelMapper();
-        Type type = new TypeToken<List<PemakaiKontrasepsiModel>>() {}.getType();
+        Type type = new TypeToken<List<PemakaiKontrasepsiModel>>() {
+        }.getType();
         List<PemakaiKontrasepsiModel> stockModels = modelMapper.map(stocks, type);
 
-        PageableList<PemakaiKontrasepsiModel> data = new PageableList<PemakaiKontrasepsiModel>(stockModels, 
-                pagePemakaiKontrasepsis.getNumber(), pagePemakaiKontrasepsis.getSize(), pagePemakaiKontrasepsis.getTotalElements());
+        PageableList<PemakaiKontrasepsiModel> data = new PageableList<PemakaiKontrasepsiModel>(stockModels,
+                pagePemakaiKontrasepsis.getNumber(), pagePemakaiKontrasepsis.getSize(),
+                pagePemakaiKontrasepsis.getTotalElements());
         return ResponseMessage.success(data);
     }
 

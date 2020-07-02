@@ -4,8 +4,15 @@ import javax.persistence.*;
 
 @Table(name = "list_pemakai_kontrasepsi")
 @Entity
-@SuppressWarnings("serial")
-public class PemakaiKontrasepsi extends AbstractEntity {
+public class PemakaiKontrasepsi {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    public Integer getId() {
+        return id;
+    }
 
     @ManyToOne
     @JoinColumn(nullable = false)
